@@ -1,6 +1,6 @@
 services:
   mongodb:
-    image: mongodb
+    image: mongo
     container_name: mongo_db
     ports:
       - 27017:27017
@@ -13,13 +13,15 @@ services:
   mongo-express:
     image: mongo-express
     container_name: mongo_express
+    depends_on:
+    - mongodb
     restart: always
     ports:
       - 8081:8081
     environment:
-      - ME_CONFOG_MONGODB_ADMINUSERNAME=ntiger07
-      - ME_CONFOG_MONGODB_ADMINPASSWORD=ntiger07
-      - ME_CONFOG_MONGODB_SERVER=MONGODB
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=ntiger07
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=ntiger07
+      - ME_CONFIG_MONGODB_SERVER=mongodb
 
 volumes:
   mongo: {}
